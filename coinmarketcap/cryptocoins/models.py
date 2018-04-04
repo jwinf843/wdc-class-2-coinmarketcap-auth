@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Cryptocurrency(models.Model):
@@ -28,3 +29,11 @@ class Cryptocurrency(models.Model):
     class Meta:
         verbose_name = 'Cryptocurrency'
         verbose_name_plural = 'Cryptocurrencies'
+
+    def __str__(self):
+        return '{} ({})'.format(self.name, self.symbol)
+
+
+class FavouriteCoin(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    coin = models.ForeignKey(Cryptocurrency, on_delete=models.CASCADE)
