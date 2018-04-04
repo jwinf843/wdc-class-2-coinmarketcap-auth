@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from cryptocoins.models import Cryptocurrency
 from cryptocoins.forms import CryptocurrencyForm
@@ -11,6 +12,7 @@ def index(request):
     })
 
 
+@login_required
 def create_new_cryptocurrency(request):
     form = CryptocurrencyForm(request.POST or None)
     if request.method == 'POST':
